@@ -8,12 +8,15 @@ A game for the original Game Boy.
 2. Extract gbdk somewhere on your computer.
 3. Clone the repository.
 
-        git clone git@github.com:Bojidarist/RockyOnMars.git && cd RockyOnMars
+```bash
+git clone git@github.com:Bojidarist/RockyOnMars.git && cd RockyOnMars
+```
 
 4. Set **GBDKDIR** environment variable.
 
-        export GBDKDIR=/path/to/gbdk
+```bash
+export GBDKDIR=/path/to/gbdk
+```
 
 5. Run `make` in root directory.
-
 6. Open the generated **.gb** file from the **out** directory in your emulator.
