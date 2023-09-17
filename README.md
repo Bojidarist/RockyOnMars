@@ -15,7 +15,7 @@ git clone git@github.com:Bojidarist/RockyOnMars.git && cd RockyOnMars
 4. Set **GBDKDIR** environment variable.
 
 ```bash
-export GBDKDIR=/path/to/gbdk
+export GBDKDIR=/path/to/gbdk/
 ```
 
 5. Run `make` in root directory.
