@@ -16,7 +16,7 @@ unsigned char check_collisions(GameObject* one, GameObject* two) {
     || (two->x >= one->x && two->x <= one->x + one->width) && (two->y >= one->y && two->y <= one->y + one->height);
 }
 
-void render_character(GameObject* character) {
+void render_object(GameObject* character) {
     // https://gbdev.gg8.se/wiki/articles/GBDK_Sprite_Tutorial
     // https://github.com/mrombout/gbdk_playground/tree/master
     if (character->currentFrame >= character->nbOfFrames - 1) {
