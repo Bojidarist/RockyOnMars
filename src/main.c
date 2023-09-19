@@ -15,13 +15,20 @@ void main(void) {
     create_ufo(&ufo, 0, 0);
     ufo.x = 140;
     ufo.y = 132;
+    render_character(&ufo);
+
     GameObject rocky;
     create_rocky(&rocky, 4, 16);
     rocky.x = 20;
     rocky.y = 140;
-
-    render_character(&ufo);
     render_character(&rocky);
+
+    GameObject hoverboard;
+    create_hoverboard(&hoverboard, 5, 17);
+    hoverboard.x = rocky.x;
+    hoverboard.y = rocky.y + 8;
+    render_character(&hoverboard);
+    
     SHOW_SPRITES;
 
     while (1)
@@ -37,14 +44,18 @@ void main(void) {
             case J_UP:
                 if (rocky.y != 120) {
                     rocky.y = 120;
+                    hoverboard.y = rocky.y + 8;
                     render_character(&rocky);
+                    render_character(&hoverboard);
                     play_move_sound();
                 }
                 break;
             case J_DOWN:
                 if (rocky.y != 140) {
                     rocky.y = 140;
+                    hoverboard.y = rocky.y + 8;
                     render_character(&rocky);
+                    render_character(&hoverboard);
                     play_move_sound();
                 }
                 break;

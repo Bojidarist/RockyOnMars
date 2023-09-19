@@ -2,6 +2,7 @@
 #include "../GameObject.c"
 #include "../Sprites/UFO.c"
 #include "../Sprites/Rocky.c"
+#include "../Sprites/Hoverboard.c"
 
 void performant_delay(uint8_t numloops) {
     uint8_t i;
@@ -70,4 +71,18 @@ void create_rocky(GameObject* rocky, uint8_t spriteIndex, uint8_t firstTileIndex
     rocky->y = 0;
 
     set_sprite_data(rocky->firstTileIndex, 1, Rocky);
+}
+
+void create_hoverboard(GameObject* hoverboard, uint8_t spriteIndex, uint8_t firstTileIndex) {
+    hoverboard->isMetaSprite = 0;
+    hoverboard->nbOfFrames = 1;
+    hoverboard->currentFrame = 0;
+    hoverboard->spriteIndex = spriteIndex;
+    hoverboard->firstTileIndex = firstTileIndex;
+    hoverboard->height = 8;
+    hoverboard->width = 8;
+    hoverboard->x = 0;
+    hoverboard->y = 0;
+
+    set_sprite_data(hoverboard->firstTileIndex, 1, Hoverboard);
 }
