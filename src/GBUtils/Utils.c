@@ -61,7 +61,7 @@ void create_ufo(GameObject* ufo, uint8_t spriteIndex, uint8_t firstTileIndex) {
 
 void create_rocky(GameObject* rocky, uint8_t spriteIndex, uint8_t firstTileIndex) {
     rocky->isMetaSprite = 0;
-    rocky->nbOfFrames = 1;
+    rocky->nbOfFrames = 2;
     rocky->currentFrame = 0;
     rocky->spriteIndex = spriteIndex;
     rocky->firstTileIndex = firstTileIndex;
@@ -70,7 +70,7 @@ void create_rocky(GameObject* rocky, uint8_t spriteIndex, uint8_t firstTileIndex
     rocky->x = 0;
     rocky->y = 0;
 
-    set_sprite_data(rocky->firstTileIndex, 1, Rocky);
+    set_sprite_data(rocky->firstTileIndex, 2, Rocky);
 }
 
 void create_hoverboard(GameObject* hoverboard, uint8_t spriteIndex, uint8_t firstTileIndex) {

@@ -35,14 +35,14 @@ void init_game_objects(void) {
     rocky.y = 140;
     render_object(&rocky);
 
-    create_hoverboard(&hoverboard, 5, 17);
+    create_hoverboard(&hoverboard, 5, 18);
     hoverboard.x = rocky.x;
     hoverboard.y = rocky.y + 8;
     render_object(&hoverboard);
 
     for (size_t i = 0; i < LASER_OBJECTS_COUNT; i++) {
         GameObject laser;
-        create_laser(&laser, 6 + i, 18 + i);
+        create_laser(&laser, 6 + i, 19 + i);
         LASER_OBJECTS[i] = laser;
     }
 }
@@ -63,8 +63,6 @@ void handle_rocky_movement(void) {
             if (rocky.y != 128) {
                 rocky.y = 128;
                 hoverboard.y = rocky.y + 8;
-                render_object(&rocky);
-                render_object(&hoverboard);
                 play_move_sound();
             }
             break;
@@ -72,12 +70,12 @@ void handle_rocky_movement(void) {
             if (rocky.y != 140) {
                 rocky.y = 140;
                 hoverboard.y = rocky.y + 8;
-                render_object(&rocky);
-                render_object(&hoverboard);
                 play_move_sound();
             }
             break;
     }
+    render_object(&rocky);
+    render_object(&hoverboard);
 }
 
 void handle_ufo_movement(void) {
