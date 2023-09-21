@@ -3,17 +3,17 @@
 #include "../Sprites/UFO.c"
 #include "../Sprites/Rocky.c"
 #include "../Sprites/Hoverboard.c"
+#include "../Sprites/Laser.c"
 
-void performant_delay(uint8_t numloops) {
+void performant_delay(uint8_t numLoops) {
     uint8_t i;
-    for(i = 0; i < numloops; i++){
+    for(i = 0; i < numLoops; i++) {
         wait_vbl_done();
     }     
 }
 
 unsigned char check_collisions(GameObject* one, GameObject* two) {
-    return (one->x >= two->x && one->x <= two->x + two->width) && (one->y >= two->y && one->y <= two->y + two->height) 
-    || (two->x >= one->x && two->x <= one->x + one->width) && (two->y >= one->y && two->y <= one->y + one->height);
+    return one->x < two->x + two->width && one->x + one->width > two->x && one->y < two->y + two->height && one->y + one->height > two->y;
 }
 
 void render_object(GameObject* character) {
@@ -85,4 +85,18 @@ void create_hoverboard(GameObject* hoverboard, uint8_t spriteIndex, uint8_t firs
     hoverboard->y = 0;
 
     set_sprite_data(hoverboard->firstTileIndex, 1, Hoverboard);
+}
+
+void create_laser(GameObject* laser, uint8_t spriteIndex, uint8_t firstTileIndex) {
+    laser->isMetaSprite = 0;
+    laser->nbOfFrames = 1;
+    laser->currentFrame = 0;
+    laser->spriteIndex = spriteIndex;
+    laser->firstTileIndex = firstTileIndex;
+    laser->height = 8;
+    laser->width = 8;
+    laser->x = 0;
+    laser->y = 0;
+
+    set_sprite_data(laser->firstTileIndex, 1, Laser);
 }
