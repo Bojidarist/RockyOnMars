@@ -26,29 +26,29 @@ void display_score(void) {
 }
 
 void init_game_objects(void) {
-    create_ufo(&ufo, 0, 0);
+    create_ufo(&ufo);
     ufo.x = 140;
     ufo.y = 132;
     render_object(&ufo);
 
-    create_rocky(&rocky, 4, 16);
+    create_rocky(&rocky);
     rocky.x = 20;
     rocky.y = 140;
     render_object(&rocky);
 
-    create_hoverboard(&hoverboard, 5, 17);
+    create_hoverboard(&hoverboard);
     hoverboard.x = rocky.x;
     hoverboard.y = rocky.y + 8;
     render_object(&hoverboard);
 
-    create_moon(&moon, 6, 21);
+    create_moon(&moon);
     moon.x = 145;
     moon.y = 30;
     render_object(&moon);
 
     for (size_t i = 0; i < LASER_OBJECTS_COUNT; i++) {
         GameObject laser;
-        create_laser(&laser, 10 + i, 25 + i);
+        create_laser(&laser);
         LASER_OBJECTS[i] = laser;
     }
 }

@@ -6,6 +6,9 @@
 #include "../Sprites/Laser.c"
 #include "../Sprites/Moon.c"
 
+uint8_t utilsCurrentSpriteIndex = 0;
+uint8_t utilsCurrentTileIndex = 0;
+
 void performant_delay(uint8_t numLoops) {
     uint8_t i;
     for(i = 0; i < numLoops; i++) {
@@ -46,72 +49,88 @@ void render_object(GameObject* character) {
     }
 }
 
-void create_ufo(GameObject* ufo, uint8_t spriteIndex, uint8_t firstTileIndex) {
+void manageSpriteTileIndex(GameObject* gameObject) {
+    if (gameObject->isMetaSprite) {
+        utilsCurrentTileIndex += gameObject->nbOfFrames * 4;
+        utilsCurrentSpriteIndex += 4;
+    }
+    else {
+        utilsCurrentTileIndex += gameObject->nbOfFrames;
+        utilsCurrentSpriteIndex += 1;
+    }
+}
+
+void create_ufo(GameObject* ufo) {
     ufo->isMetaSprite = 1;
     ufo->nbOfFrames = 4;
     ufo->currentFrame = 0;
-    ufo->spriteIndex = spriteIndex;
-    ufo->firstTileIndex = firstTileIndex;
+    ufo->spriteIndex = utilsCurrentSpriteIndex;
+    ufo->firstTileIndex = utilsCurrentTileIndex;
     ufo->height = 16;
     ufo->width = 16;
     ufo->x = 0;
     ufo->y = 0;
 
+    manageSpriteTileIndex(ufo);
     set_sprite_data(ufo->firstTileIndex, 4*4, UFO);
 }
 
-void create_rocky(GameObject* rocky, uint8_t spriteIndex, uint8_t firstTileIndex) {
+void create_rocky(GameObject* rocky) {
     rocky->isMetaSprite = 0;
     rocky->nbOfFrames = 1;
     rocky->currentFrame = 0;
-    rocky->spriteIndex = spriteIndex;
-    rocky->firstTileIndex = firstTileIndex;
+    rocky->spriteIndex = utilsCurrentSpriteIndex;
+    rocky->firstTileIndex = utilsCurrentTileIndex;
     rocky->height = 8;
     rocky->width = 8;
     rocky->x = 0;
     rocky->y = 0;
 
+    manageSpriteTileIndex(rocky);
     set_sprite_data(rocky->firstTileIndex, 1, Rocky);
 }
 
-void create_hoverboard(GameObject* hoverboard, uint8_t spriteIndex, uint8_t firstTileIndex) {
+void create_hoverboard(GameObject* hoverboard) {
     hoverboard->isMetaSprite = 0;
     hoverboard->nbOfFrames = 4;
     hoverboard->currentFrame = 0;
-    hoverboard->spriteIndex = spriteIndex;
-    hoverboard->firstTileIndex = firstTileIndex;
+    hoverboard->spriteIndex = utilsCurrentSpriteIndex;
+    hoverboard->firstTileIndex = utilsCurrentTileIndex;
     hoverboard->height = 8;
     hoverboard->width = 8;
     hoverboard->x = 0;
     hoverboard->y = 0;
 
+    manageSpriteTileIndex(hoverboard);
     set_sprite_data(hoverboard->firstTileIndex, 4, Hoverboard);
 }
 
-void create_laser(GameObject* laser, uint8_t spriteIndex, uint8_t firstTileIndex) {
+void create_laser(GameObject* laser) {
     laser->isMetaSprite = 0;
     laser->nbOfFrames = 1;
     laser->currentFrame = 0;
-    laser->spriteIndex = spriteIndex;
-    laser->firstTileIndex = firstTileIndex;
+    laser->spriteIndex = utilsCurrentSpriteIndex;
+    laser->firstTileIndex = utilsCurrentTileIndex;
     laser->height = 8;
     laser->width = 8;
     laser->x = 0;
     laser->y = 0;
 
+    manageSpriteTileIndex(laser);
     set_sprite_data(laser->firstTileIndex, 1, Laser);
 }
 
-void create_moon(GameObject* moon, uint8_t spriteIndex, uint8_t firstTileIndex) {
+void create_moon(GameObject* moon) {
     moon->isMetaSprite = 1;
     moon->nbOfFrames = 1;
     moon->currentFrame = 0;
-    moon->spriteIndex = spriteIndex;
-    moon->firstTileIndex = firstTileIndex;
+    moon->spriteIndex = utilsCurrentSpriteIndex;
+    moon->firstTileIndex = utilsCurrentTileIndex;
     moon->height = 16;
     moon->width = 16;
     moon->x = 0;
     moon->y = 0;
 
+    manageSpriteTileIndex(moon);
     set_sprite_data(moon->firstTileIndex, 4, Moon);
 }
