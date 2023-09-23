@@ -35,14 +35,14 @@ void init_game_objects(void) {
     rocky.y = 140;
     render_object(&rocky);
 
-    create_hoverboard(&hoverboard, 5, 18);
+    create_hoverboard(&hoverboard, 5, 17);
     hoverboard.x = rocky.x;
     hoverboard.y = rocky.y + 8;
     render_object(&hoverboard);
 
     for (size_t i = 0; i < LASER_OBJECTS_COUNT; i++) {
         GameObject laser;
-        create_laser(&laser, 6 + i, 19 + i);
+        create_laser(&laser, 6 + i, 21 + i);
         LASER_OBJECTS[i] = laser;
     }
 }
@@ -206,7 +206,7 @@ void make_game_harder(void) {
 
 void main(void) {
     setup_sound(1, 0x77, 0xFF);
-    display_title_screen();
+    // display_title_screen();
     init_game_objects();
     SHOW_SPRITES;
 
