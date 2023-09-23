@@ -206,7 +206,7 @@ void make_game_harder(void) {
 
 void main(void) {
     setup_sound(1, 0x77, 0xFF);
-    // display_title_screen();
+    display_title_screen();
     init_game_objects();
     SHOW_SPRITES;
 
