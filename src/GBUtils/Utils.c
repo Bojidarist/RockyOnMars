@@ -4,6 +4,7 @@
 #include "../Sprites/Rocky.c"
 #include "../Sprites/Hoverboard.c"
 #include "../Sprites/Laser.c"
+#include "../Sprites/Moon.c"
 
 void performant_delay(uint8_t numLoops) {
     uint8_t i;
@@ -99,4 +100,18 @@ void create_laser(GameObject* laser, uint8_t spriteIndex, uint8_t firstTileIndex
     laser->y = 0;
 
     set_sprite_data(laser->firstTileIndex, 1, Laser);
+}
+
+void create_moon(GameObject* moon, uint8_t spriteIndex, uint8_t firstTileIndex) {
+    moon->isMetaSprite = 1;
+    moon->nbOfFrames = 1;
+    moon->currentFrame = 0;
+    moon->spriteIndex = spriteIndex;
+    moon->firstTileIndex = firstTileIndex;
+    moon->height = 16;
+    moon->width = 16;
+    moon->x = 0;
+    moon->y = 0;
+
+    set_sprite_data(moon->firstTileIndex, 4, Moon);
 }

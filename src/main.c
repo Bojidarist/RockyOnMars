@@ -15,6 +15,7 @@ uint32_t score = 0;
 GameObject ufo;
 GameObject rocky;
 GameObject hoverboard;
+GameObject moon;
 uint8_t isGameOver = 0;
 
 void display_score(void) {
@@ -40,9 +41,14 @@ void init_game_objects(void) {
     hoverboard.y = rocky.y + 8;
     render_object(&hoverboard);
 
+    create_moon(&moon, 6, 21);
+    moon.x = 145;
+    moon.y = 30;
+    render_object(&moon);
+
     for (size_t i = 0; i < LASER_OBJECTS_COUNT; i++) {
         GameObject laser;
-        create_laser(&laser, 6 + i, 21 + i);
+        create_laser(&laser, 10 + i, 25 + i);
         LASER_OBJECTS[i] = laser;
     }
 }
