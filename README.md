@@ -4,6 +4,7 @@ Armed with a high-tech hoverboard and an indomitable spirit, Rocky is on a missi
 
 ### Table of contents <!-- omit from toc -->
 - [Downloads](#downloads)
+- [Controls](#controls)
 - [Screenshots](#screenshots)
     - [Gameplay](#gameplay)
     - [Title](#title)
@@ -14,6 +15,12 @@ Armed with a high-tech hoverboard and an indomitable spirit, Rocky is on a missi
 # Downloads
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Bojidarist/RockyOnMars/releases)
 [![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://bojidarist.itch.io/rocky-on-mars)
+
+# Controls
+| Movement | Start/Continue |
+| -------- | -------------- |
+| D-pad    | Start          |
+
 
 # Screenshots
 ### Gameplay
