@@ -5,6 +5,8 @@
 #include "GameObject.c"
 #include "GBUtils/Utils.c"
 #include <rand.h>
+#include "Sprites/MapTiles.c"
+#include "Sprites/Map.c"
 
 const uint8_t LASER_OBJECTS_COUNT = 5;
 GameObject LASER_OBJECTS[5];
@@ -17,12 +19,14 @@ GameObject rocky;
 GameObject hoverboard;
 GameObject moon;
 uint8_t isGameOver = 0;
+uint8_t backgroundScrollOffsetx1 = 0;
+uint8_t backgroundScrollOffsetx2 = 0;
 
 void display_score(void) {
     if(sys_time % 30 == 0) {
         score += 1;
-        gotoxy(1, 1); printf("Score:%d", score);
     }
+    gotoxy(1, 1); printf("Score:%d", score);
 }
 
 void init_game_objects(void) {
@@ -43,7 +47,7 @@ void init_game_objects(void) {
 
     create_moon(&moon);
     moon.x = 145;
-    moon.y = 30;
+    moon.y = 25;
     render_object(&moon);
 
     for (size_t i = 0; i < LASER_OBJECTS_COUNT; i++) {
@@ -61,6 +65,7 @@ void reset_game(void) {
         LASER_OBJECTS[i].x = 240;
         render_object(&LASER_OBJECTS[i]);
     }
+    set_bkg_tiles(0, 0, 40, 18, Map);
 }
 
 void handle_rocky_movement(void) {
@@ -159,6 +164,10 @@ void display_title_screen(void) {
 
 void display_game_over_screen(void) {
     HIDE_SPRITES;
+    backgroundScrollOffsetx1 = 0;
+    backgroundScrollOffsetx2 = 0;
+    cls();
+    display_score();
     gotoxy(5,8);
     printf("GAME OVER");
 
@@ -210,17 +219,52 @@ void make_game_harder(void) {
     
 }
 
+void interrupt_LCD(void) {
+    switch (LYC_REG)
+    {
+        case 0x00:
+            move_bkg(0,0);
+            LYC_REG = 0x10;
+            break;
+        case 0x10:
+            move_bkg(backgroundScrollOffsetx1, 0);
+            LYC_REG = 0x64;
+            break;
+        case 0x64:
+            move_bkg(backgroundScrollOffsetx2, 0);
+            LYC_REG = 0x00;
+            break;
+    }
+}
+
 void main(void) {
     setup_sound(1, 0x77, 0xFF);
     display_title_screen();
-    init_game_objects();
-    SHOW_SPRITES;
 
+    set_bkg_data(0, 6, MapTiles);
+    set_bkg_tiles(0, 0, 40, 18, Map);
+
+    STAT_REG = 0x45;
+    LY_REG = 0x00;
+
+    disable_interrupts();
+    add_LCD(interrupt_LCD);
+    enable_interrupts();
+    set_interrupts(VBL_IFLAG | LCD_IFLAG);
+
+    init_game_objects();
+    SHOW_BKG;
+    SHOW_SPRITES;
+    DISPLAY_ON;
+    
     while (1) {
         wait_vbl_done();
         if (isGameOver) {
             display_game_over_screen();
         }
+
+        backgroundScrollOffsetx1 += 1;
+        backgroundScrollOffsetx2 += 2;
 
         display_score();
         handle_rocky_movement();
