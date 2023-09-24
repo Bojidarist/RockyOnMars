@@ -252,6 +252,10 @@ void main(void) {
     setup_sound(1, 0x77, 0xFF);
     display_title_screen();
 
+    uint16_t seed = LY_REG;
+    seed |= (uint16_t)DIV_REG << 8;
+    initrand(seed);
+
     set_bkg_data(0, 6, MapTiles);
     set_bkg_tiles(0, 0, 40, 18, Map);
 
