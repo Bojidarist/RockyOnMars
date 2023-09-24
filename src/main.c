@@ -192,31 +192,42 @@ void display_game_over_screen(void) {
 void make_game_harder(void) { 
     switch (score) {
         case 0:
-            fireWaitTime = 180;
+            fireWaitTime = 80;
+            laserSpeed = 1;
+            break;
+        case 25:
+            fireWaitTime = 65;
             laserSpeed = 1;
             break;
         case 50:
-            fireWaitTime = 150;
+            fireWaitTime = 50;
+            laserSpeed = 2;
+            break;
+        case 75:
+            fireWaitTime = 45;
             laserSpeed = 2;
             break;
         case 100:
-            fireWaitTime = 100;
+            fireWaitTime = 40;
+            laserSpeed = 2;
+            break;
+        case 125:
+            fireWaitTime = 35;
             laserSpeed = 2;
             break;
         case 150:
-            fireWaitTime = 80;
+            fireWaitTime = 30;
             laserSpeed = 3;
             break;
         case 200:
-            fireWaitTime = 60;
-            laserSpeed = 4;
+            fireWaitTime = 25;
+            laserSpeed = 3;
             break;
         case 300:
-            fireWaitTime = 40;
-            laserSpeed = 5;
+            fireWaitTime = 25;
+            laserSpeed = 4;
             break;
     }
-    
 }
 
 void interrupt_LCD(void) {
